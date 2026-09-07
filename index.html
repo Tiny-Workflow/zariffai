@@ -1,57 +1,1304 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zariff AI</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            margin: 0;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: Arial, sans-serif;
-            background: #0f172a;
-            color: white;
-            text-align: center;
-        }
+<title>Zariff AI — Your AI. Your Way.</title>
 
-        .container {
-            padding: 30px;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        h1 {
-            font-size: 60px;
-            margin: 0;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        .progress {
-            font-size: 24px;
-            margin-top: 15px;
-            color: #94a3b8;
-        }
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #060912;
+    color: white;
+    overflow-x: hidden;
+}
 
-        .owner {
-            margin-top: 50px;
-            font-size: 14px;
-            color: #64748b;
-        }
-    </style>
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ================= NAVBAR ================= */
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 7%;
+    background: rgba(6,9,18,0.78);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: #7268ff;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+.nav-links a {
+    color: #9ca6ba;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    color: white;
+}
+
+.nav-btn {
+    background: #6c63ff;
+    padding: 11px 18px;
+    border-radius: 8px;
+    color: white !important;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 100vh;
+    padding: 150px 7% 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+.glow {
+    position: absolute;
+    width: 550px;
+    height: 550px;
+    background: #5047ff;
+    opacity: .13;
+    filter: blur(130px);
+    border-radius: 50%;
+}
+
+.hero-content {
+    max-width: 950px;
+    position: relative;
+}
+
+.badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid #39326e;
+    background: rgba(108,99,255,.08);
+    color: #aaa4ff;
+    border-radius: 30px;
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+    font-size: clamp(52px, 8vw, 96px);
+    letter-spacing: -6px;
+    line-height: .98;
+    margin-bottom: 30px;
+}
+
+.hero h1 span {
+    background: linear-gradient(90deg,#8178ff,#45c9ff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.hero p {
+    max-width: 730px;
+    margin: auto;
+    color: #9ba5b8;
+    font-size: 19px;
+    line-height: 1.75;
+}
+
+.buttons {
+    margin-top: 38px;
+}
+
+.primary,
+.secondary {
+    display: inline-block;
+    padding: 15px 25px;
+    border-radius: 9px;
+    margin: 5px;
+    transition: .25s;
+    font-weight: bold;
+}
+
+.primary {
+    background: #6c63ff;
+}
+
+.primary:hover {
+    background: #7b73ff;
+    transform: translateY(-2px);
+}
+
+.secondary {
+    border: 1px solid #293248;
+}
+
+.secondary:hover {
+    background: #101625;
+}
+
+/* ================= SECTIONS ================= */
+
+section {
+    padding: 105px 7%;
+}
+
+.section-title {
+    text-align: center;
+    max-width: 720px;
+    margin: auto;
+}
+
+.section-title h2 {
+    font-size: 45px;
+    letter-spacing: -2px;
+    margin-bottom: 18px;
+}
+
+.section-title p {
+    color: #8f99ad;
+    line-height: 1.7;
+}
+
+/* ================= FEATURES ================= */
+
+.features {
+    margin-top: 55px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+}
+
+.card {
+    padding: 32px;
+    background: #0c1220;
+    border: 1px solid #1c2638;
+    border-radius: 17px;
+    transition: .3s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    border-color: #4940bd;
+}
+
+.icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 13px;
+    background: #171d36;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    margin-bottom: 21px;
+}
+
+.card h3 {
+    font-size: 21px;
+    margin-bottom: 12px;
+}
+
+.card p {
+    color: #8993a7;
+    line-height: 1.65;
+}
+
+/* ================= HOW IT WORKS ================= */
+
+.workflow {
+    background: #080d18;
+}
+
+.workflow-grid {
+    max-width: 1100px;
+    margin: 55px auto 0;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+}
+
+.step {
+    padding: 30px;
+    background: #0d1422;
+    border: 1px solid #1d2739;
+    border-radius: 15px;
+}
+
+.step-number {
+    color: #7067ff;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.step h3 {
+    margin-bottom: 12px;
+}
+
+.step p {
+    color: #8993a7;
+    line-height: 1.65;
+}
+
+/* ================= PERSONALIZATION ================= */
+
+.personal-box {
+    max-width: 1100px;
+    margin: 60px auto 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 65px;
+    align-items: center;
+}
+
+.personal-text h2 {
+    font-size: 45px;
+    letter-spacing: -2px;
+    margin-bottom: 20px;
+}
+
+.personal-text h2 span {
+    color: #7168ff;
+}
+
+.personal-text p {
+    color: #919bad;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.points {
+    list-style: none;
+}
+
+.points li {
+    margin: 14px 0;
+    color: #c5ccda;
+}
+
+.points li::before {
+    content: "✓";
+    color: #7168ff;
+    margin-right: 12px;
+    font-weight: bold;
+}
+
+.terminal {
+    background: #070b13;
+    border: 1px solid #202a3e;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 20px 70px rgba(0,0,0,.3);
+}
+
+.terminal-top {
+    color: #68748a;
+    font-size: 13px;
+    margin-bottom: 25px;
+}
+
+.terminal-line {
+    margin: 16px 0;
+    color: #8e99ac;
+}
+
+.terminal-line span {
+    color: #7168ff;
+}
+
+.success {
+    color: #52d69b;
+}
+
+/* ================= SECURITY ================= */
+
+.security {
+    background: #080d18;
+    text-align: center;
+}
+
+.security-box {
+    max-width: 900px;
+    margin: 55px auto 0;
+    padding: 50px;
+    border-radius: 20px;
+    background: linear-gradient(145deg,#101729,#0a101d);
+    border: 1px solid #232e43;
+}
+
+.shield {
+    font-size: 55px;
+    margin-bottom: 20px;
+}
+
+.security-box h3 {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.security-box p {
+    color: #919bad;
+    line-height: 1.75;
+}
+
+/* ================= USE CASES ================= */
+
+.usecases {
+    margin-top: 55px;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+}
+
+.usecase {
+    padding: 30px;
+    background: #0c1220;
+    border: 1px solid #1d2739;
+    border-radius: 15px;
+}
+
+.usecase h3 {
+    margin-bottom: 12px;
+}
+
+.usecase p {
+    color: #8d97aa;
+    line-height: 1.7;
+}
+
+/* ================= COMMUNITY ================= */
+
+.community {
+    background: #080d18;
+}
+
+.forum {
+    max-width: 1000px;
+    margin: 55px auto 0;
+}
+
+.forum-form {
+    padding: 25px;
+    background: #0d1422;
+    border: 1px solid #202b40;
+    border-radius: 15px;
+    margin-bottom: 25px;
+}
+
+.forum-form input,
+.forum-form textarea {
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 13px;
+    border-radius: 8px;
+    border: 1px solid #273248;
+    background: #080d17;
+    color: white;
+    outline: none;
+}
+
+.forum-form textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.forum-form button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #6c63ff;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.posts {
+    display: grid;
+    gap: 15px;
+}
+
+.post {
+    background: #0d1422;
+    border: 1px solid #202b40;
+    border-radius: 14px;
+    padding: 25px;
+}
+
+.post-name {
+    color: #7770ff;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.post-content {
+    color: #adb5c5;
+    line-height: 1.6;
+}
+
+/* ================= PRICING ================= */
+
+.pricing {
+    background: #060912;
+}
+
+.pricing-grid {
+    max-width: 1200px;
+    margin: 55px auto 0;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 22px;
+}
+
+.price-card {
+    padding: 35px;
+    border-radius: 18px;
+    background: #0d1422;
+    border: 1px solid #202a3e;
+    position: relative;
+}
+
+.price-card.featured {
+    border-color: #6c63ff;
+    box-shadow: 0 0 50px rgba(108,99,255,.12);
+}
+
+.popular {
+    position: absolute;
+    top: -13px;
+    right: 22px;
+    background: #6c63ff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.price-card h3 {
+    font-size: 24px;
+}
+
+.price {
+    font-size: 43px;
+    font-weight: bold;
+    margin: 18px 0;
+}
+
+.price span {
+    font-size: 14px;
+    color: #7e899c;
+    font-weight: normal;
+}
+
+.price-card > p {
+    color: #8e98aa;
+    min-height: 50px;
+    line-height: 1.5;
+    margin-bottom: 22px;
+}
+
+.plan-list {
+    list-style: none;
+    margin-bottom: 25px;
+}
+
+.plan-list li {
+    margin: 13px 0;
+    color: #b9c1cf;
+    font-size: 14px;
+}
+
+.plan-list li::before {
+    content: "✓";
+    color: #7168ff;
+    margin-right: 9px;
+}
+
+.plan-button {
+    display: block;
+    text-align: center;
+    padding: 13px;
+    border-radius: 8px;
+    background: #171e31;
+    border: 1px solid #29344b;
+    transition: .2s;
+}
+
+.featured .plan-button {
+    background: #6c63ff;
+    border-color: #6c63ff;
+}
+
+.plan-button:hover {
+    transform: translateY(-2px);
+}
+
+/* ================= MOBILE ================= */
+
+.mobile {
+    text-align: center;
+    background: #080d18;
+}
+
+.mobile-box {
+    max-width: 850px;
+    margin: 50px auto 0;
+    padding: 45px;
+    border-radius: 20px;
+    background: #0d1422;
+    border: 1px solid #202b40;
+}
+
+.mobile-box h3 {
+    font-size: 30px;
+    margin-bottom: 15px;
+}
+
+.mobile-box p {
+    color: #929caf;
+    line-height: 1.7;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    padding: 45px 7%;
+    border-top: 1px solid #192235;
+    display: flex;
+    justify-content: space-between;
+    color: #687388;
+    font-size: 14px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:850px) {
+
+    .nav-links {
+        display: none;
+    }
+
+    .features,
+    .workflow-grid,
+    .usecases,
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .personal-box {
+        grid-template-columns: 1fr;
+    }
+
+    section {
+        padding: 80px 6%;
+    }
+
+    .hero h1 {
+        letter-spacing: -3px;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 12px;
+    }
+}
+</style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Zariff AI</h1>
 
-        <div class="progress">
-            Under Progress...
-        </div>
+<!-- NAVBAR -->
 
-        <div class="owner">
-            Owned by PM
-        </div>
+<nav>
+
+    <div class="logo">
+        Zariff<span>AI</span>
     </div>
+
+    <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#security">Security</a>
+        <a href="#community">Forum</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#pricing" class="nav-btn">Get Started</a>
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="glow"></div>
+
+    <div class="hero-content">
+
+        <div class="badge">
+            PERSONAL AI • OFFLINE • VOICE + GESTURE
+        </div>
+
+        <h1>
+            Your computer.<br>
+            <span>Your way.</span>
+        </h1>
+
+        <p>
+            Zariff AI is a personalized AI agent that lets you
+            control your computer naturally through voice and
+            hand gestures — without constantly touching your keyboard
+            or mouse.
+        </p>
+
+        <div class="buttons">
+
+            <a href="#pricing" class="primary">
+                Get Zariff AI
+            </a>
+
+            <a href="#features" class="secondary">
+                Explore Features
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section id="features">
+
+    <div class="section-title">
+
+        <h2>
+            An AI built around you.
+        </h2>
+
+        <p>
+            Zariff AI combines a personal language model with
+            natural interaction and computer automation.
+        </p>
+
+    </div>
+
+
+    <div class="features">
+
+        <div class="card">
+            <div class="icon">🎙️</div>
+            <h3>Natural Voice</h3>
+            <p>
+                Speak normally. Zariff AI understands your
+                instructions and can turn them into computer workflows.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="icon">🖐️</div>
+            <h3>Hand Gestures</h3>
+            <p>
+                Interact using natural gestures alongside voice.
+                Your computer becomes an interface you don't have
+                to constantly touch.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="icon">🧠</div>
+            <h3>Personal LLM</h3>
+            <p>
+                Zariff AI builds a personalized experience around
+                your preferences, workflows and the way you communicate.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="icon">⚡</div>
+            <h3>Offline Capable</h3>
+            <p>
+                Designed to process your personal AI experience locally,
+                reducing the need to send everything to the cloud.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="icon">🛡️</div>
+            <h3>Built-in Firewall</h3>
+            <p>
+                A security layer helps control the interaction between
+                the AI agent and your computer.
+            </p>
+        </div>
+
+
+        <div class="card">
+            <div class="icon">🌎</div>
+            <h3>Your Language</h3>
+            <p>
+                Communicate naturally in your language and receive
+                personalized responses without forcing yourself
+                into a rigid command system.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- WORKFLOW -->
+
+<section class="workflow">
+
+    <div class="section-title">
+
+        <h2>
+            Just speak. Just gesture.
+        </h2>
+
+        <p>
+            Zariff AI is designed to make computer interaction
+            feel more natural.
+        </p>
+
+    </div>
+
+
+    <div class="workflow-grid">
+
+        <div class="step">
+            <div class="step-number">01 — SPEAK</div>
+            <h3>Tell Zariff what you want.</h3>
+            <p>
+                Give instructions naturally instead of memorizing
+                rigid commands.
+            </p>
+        </div>
+
+
+        <div class="step">
+            <div class="step-number">02 — UNDERSTAND</div>
+            <h3>Zariff interprets it.</h3>
+            <p>
+                The AI understands the context of your request
+                and your personalized preferences.
+            </p>
+        </div>
+
+
+        <div class="step">
+            <div class="step-number">03 — ACT</div>
+            <h3>Your computer gets to work.</h3>
+            <p>
+                Zariff can perform supported workflows and tasks
+                on your computer.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PERSONALIZATION -->
+
+<section>
+
+    <div class="personal-box">
+
+        <div class="personal-text">
+
+            <h2>
+                Not just an AI.<br>
+                <span>Your AI.</span>
+            </h2>
+
+            <p>
+                Zariff AI is designed to become personalized through
+                your interactions, preferences and workflows.
+            </p>
+
+            <p>
+                Instead of treating every user identically,
+                Zariff can create a customized experience that
+                adapts to the way you use your computer.
+            </p>
+
+            <ul class="points">
+                <li>Personalized responses</li>
+                <li>Custom workflows</li>
+                <li>Natural language interaction</li>
+                <li>Local AI capabilities</li>
+                <li>Voice and gesture control</li>
+            </ul>
+
+        </div>
+
+
+        <div class="terminal">
+
+            <div class="terminal-top">
+                ZARIFF_AI // PERSONAL MODEL
+            </div>
+
+            <div class="terminal-line">
+                <span>></span> Loading personal model...
+            </div>
+
+            <div class="terminal-line">
+                <span>></span> Loading preferences...
+            </div>
+
+            <div class="terminal-line">
+                <span>></span> Loading workflows...
+            </div>
+
+            <div class="terminal-line">
+                <span>></span> Understanding user context...
+            </div>
+
+            <div class="terminal-line success">
+                ✓ Personalization ready.
+            </div>
+
+            <div class="terminal-line">
+                <span>></span> Agent standing by.
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SECURITY -->
+
+<section id="security" class="security">
+
+    <div class="section-title">
+
+        <h2>
+            Powerful AI needs boundaries.
+        </h2>
+
+        <p>
+            Zariff AI is designed with security in mind because
+            an AI capable of controlling your computer should
+            not have unlimited access.
+        </p>
+
+    </div>
+
+
+    <div class="security-box">
+
+        <div class="shield">🛡️</div>
+
+        <h3>
+            Built-in AI Firewall
+        </h3>
+
+        <p>
+            Zariff's security layer helps regulate the actions
+            an AI agent can take on your system, providing an
+            additional boundary between AI decisions and your
+            computer.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- USE CASES -->
+
+<section>
+
+    <div class="section-title">
+
+        <h2>
+            Tell it what you need.
+        </h2>
+
+        <p>
+            Zariff AI is designed to handle more than simple
+            questions and answers.
+        </p>
+
+    </div>
+
+
+    <div class="usecases">
+
+        <div class="usecase">
+            <h3>🍕 Order a Pizza</h3>
+            <p>
+                Give Zariff a supported task and let it handle
+                the computer workflow for you.
+            </p>
+        </div>
+
+
+        <div class="usecase">
+            <h3>📚 Learn Something</h3>
+            <p>
+                Ask Zariff to teach you a concept and receive
+                a personalized explanation.
+            </p>
+        </div>
+
+
+        <div class="usecase">
+            <h3>⌨️ Type For You</h3>
+            <p>
+                Speak naturally and let Zariff handle supported
+                typing and computer interaction tasks.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- COMMUNITY / FORUM -->
+
+<section id="community" class="community">
+
+    <div class="section-title">
+
+        <h2>
+            The Zariff community.
+        </h2>
+
+        <p>
+            Discuss workflows, share ideas and discover how
+            other users are building their own AI experience.
+        </p>
+
+    </div>
+
+
+    <div class="forum">
+
+        <div class="forum-form">
+
+            <input
+                id="name"
+                type="text"
+                placeholder="Your name"
+            >
+
+            <textarea
+                id="message"
+                placeholder="Start a discussion..."
+            ></textarea>
+
+            <button onclick="addPost()">
+                Post Discussion
+            </button>
+
+        </div>
+
+
+        <div class="posts" id="posts"></div>
+
+    </div>
+
+</section>
+
+
+<!-- PRICING -->
+
+<section id="pricing" class="pricing">
+
+    <div class="section-title">
+
+        <h2>
+            Choose your Zariff.
+        </h2>
+
+        <p>
+            Start free. Upgrade when you want more from your
+            personal AI agent.
+        </p>
+
+    </div>
+
+
+    <div class="pricing-grid">
+
+
+        <!-- FREE -->
+
+        <div class="price-card">
+
+            <h3>Free</h3>
+
+            <div class="price">
+                ₹0
+                <span>/month</span>
+            </div>
+
+            <p>
+                Explore the Zariff AI experience.
+            </p>
+
+            <ul class="plan-list">
+
+                <li>Core AI access</li>
+                <li>Voice interaction</li>
+                <li>Basic personalization</li>
+                <li>Community forum</li>
+                <li>Download Zariff AI</li>
+
+            </ul>
+
+            <a href="#" class="plan-button">
+                Download Free
+            </a>
+
+        </div>
+
+
+        <!-- PRO -->
+
+        <div class="price-card featured">
+
+            <div class="popular">
+                MOST POPULAR
+            </div>
+
+            <h3>Pro</h3>
+
+            <div class="price">
+                ₹499
+                <span>/month</span>
+            </div>
+
+            <p>
+                For users who want a deeper personalized experience.
+            </p>
+
+            <ul class="plan-list">
+
+                <li>Everything in Free</li>
+                <li>Advanced personalization</li>
+                <li>Gesture control</li>
+                <li>More computer workflows</li>
+                <li>Enhanced AI capabilities</li>
+                <li>Priority updates</li>
+
+            </ul>
+
+            <a href="#" class="plan-button">
+                Choose Pro
+            </a>
+
+        </div>
+
+
+        <!-- ADVANCED -->
+
+        <div class="price-card">
+
+            <h3>Advanced</h3>
+
+            <div class="price">
+                ₹1,299
+                <span>/month</span>
+            </div>
+
+            <p>
+                The complete Zariff AI experience.
+            </p>
+
+            <ul class="plan-list">
+
+                <li>Everything in Pro</li>
+                <li>Maximum personalization</li>
+                <li>Advanced agent workflows</li>
+                <li>Priority processing</li>
+                <li>Early access to new features</li>
+                <li>Advanced customization</li>
+
+            </ul>
+
+            <a href="#" class="plan-button">
+                Choose Advanced
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MOBILE -->
+
+<section class="mobile">
+
+    <div class="mobile-box">
+
+        <h3>
+            Zariff is coming to mobile.
+        </h3>
+
+        <p>
+            A mobile version of Zariff AI is currently under development,
+            bringing the personalized assistant experience beyond the desktop.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div>
+        © 2026 Zariff AI
+    </div>
+
+    <div>
+        Built by PM
+    </div>
+
+</footer>
+
+
+<!-- ================= FORUM JAVASCRIPT ================= -->
+
+<script>
+
+function loadPosts() {
+
+    const posts =
+        JSON.parse(localStorage.getItem("zariffPosts")) || [];
+
+    const container =
+        document.getElementById("posts");
+
+    container.innerHTML = "";
+
+    posts.forEach(post => {
+
+        const div = document.createElement("div");
+
+        div.className = "post";
+
+        div.innerHTML = `
+            <div class="post-name">
+                ${escapeHTML(post.name)}
+            </div>
+
+            <div class="post-content">
+                ${escapeHTML(post.message)}
+            </div>
+        `;
+
+        container.appendChild(div);
+
+    });
+
+}
+
+
+function addPost() {
+
+    const name =
+        document.getElementById("name").value.trim();
+
+    const message =
+        document.getElementById("message").value.trim();
+
+    if (!name || !message) {
+
+        alert("Please enter your name and discussion.");
+
+        return;
+
+    }
+
+    const posts =
+        JSON.parse(localStorage.getItem("zariffPosts")) || [];
+
+    posts.unshift({
+        name: name,
+        message: message
+    });
+
+    localStorage.setItem(
+        "zariffPosts",
+        JSON.stringify(posts)
+    );
+
+    document.getElementById("name").value = "";
+    document.getElementById("message").value = "";
+
+    loadPosts();
+
+}
+
+
+function escapeHTML(text) {
+
+    const div = document.createElement("div");
+
+    div.textContent = text;
+
+    return div.innerHTML;
+
+}
+
+
+loadPosts();
+
+</script>
+
 </body>
 </html>
+```
