@@ -1,581 +1,762 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Zariff AI — Your Computer. Your Way.</title>
-
-<!-- Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #070b14;
-    color: #fff;
-    line-height: 1.6;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-nav {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    background: rgba(7, 11, 20, 0.85);
-    backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 18px 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: 800;
-    letter-spacing: -1px;
-}
-
-.logo span {
-    color: #6c63ff;
-}
-
-.nav-links {
-    display: flex;
-    gap: 25px;
-    align-items: center;
-}
-
-.nav-links a {
-    color: #aaa;
-    transition: 0.3s;
-}
-
-.nav-links a:hover {
-    color: white;
-}
-
-.nav-btn {
-    background: #6c63ff;
-    color: white !important;
-    padding: 10px 18px;
-    border-radius: 8px;
-}
-
-/* HERO */
-
-.hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 130px 20px 80px;
-    background:
-        radial-gradient(circle at 50% 20%, rgba(108,99,255,0.25), transparent 35%),
-        #070b14;
-}
-
-.hero-content {
-    max-width: 900px;
-}
-
-.badge {
-    display: inline-block;
-    padding: 8px 16px;
-    border: 1px solid rgba(108,99,255,0.5);
-    border-radius: 30px;
-    color: #aaa;
-    margin-bottom: 25px;
-    font-size: 14px;
-}
-
-.hero h1 {
-    font-size: clamp(48px, 8vw, 90px);
-    line-height: 1;
-    letter-spacing: -5px;
-    margin-bottom: 25px;
-}
-
-.gradient-text {
-    background: linear-gradient(90deg, #6c63ff, #00d4ff);
-    -webkit-background-clip: text;
-    color: transparent;
-}
-
-.hero p {
-    color: #a6a9b5;
-    font-size: 20px;
-    max-width: 700px;
-    margin: auto;
-}
-
-.hero-buttons {
-    margin-top: 35px;
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-}
-
-.btn {
-    padding: 14px 25px;
-    border-radius: 9px;
-    font-weight: bold;
-    display: inline-block;
-    transition: 0.25s;
-    cursor: pointer;
-    border: none;
-    font-size: 15px;
-}
-
-.btn-primary {
-    background: #6c63ff;
-    color: white;
-}
-
-.btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(108,99,255,0.3);
-}
-
-.btn-secondary {
-    border: 1px solid #333;
-    color: #ddd;
-}
-
-.btn-secondary:hover {
-    border-color: #666;
-}
-
-/* GENERAL */
-
-section {
-    padding: 100px 20px;
-}
-
-.container {
-    max-width: 1100px;
-    margin: auto;
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 55px;
-}
-
-.section-title h2 {
-    font-size: 42px;
-    margin-bottom: 12px;
-}
-
-.section-title p {
-    color: #888;
-}
-
-/* FEATURES */
-
-.features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
-}
-
-.card {
-    background: #0d1322;
-    border: 1px solid #1b2233;
-    padding: 28px;
-    border-radius: 15px;
-    transition: 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    border-color: #393f57;
-}
-
-.card-icon {
-    font-size: 30px;
-    margin-bottom: 15px;
-}
-
-.card h3 {
-    margin-bottom: 10px;
-}
-
-.card p {
-    color: #8f95a6;
-}
-
-/* WORKFLOW */
-
-.workflow {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-}
-
-.step {
-    text-align: center;
-    padding: 35px;
-}
-
-.step-number {
-    width: 55px;
-    height: 55px;
-    margin: auto auto 20px;
-    border-radius: 50%;
-    background: #151b2c;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #6c63ff;
-    font-size: 20px;
-    font-weight: bold;
-}
-
-/* TERMINAL */
-
-.terminal {
-    background: #050810;
-    border: 1px solid #20283a;
-    border-radius: 15px;
-    padding: 25px;
-    max-width: 800px;
-    margin: auto;
-    font-family: monospace;
-    color: #b9c0d0;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-}
-
-.terminal-line {
-    margin: 10px 0;
-}
-
-.green {
-    color: #54d68c;
-}
-
-.blue {
-    color: #6c9cff;
-}
-
-/* SECURITY */
-
-.security {
-    text-align: center;
-    max-width: 800px;
-    margin: auto;
-}
-
-.security-box {
-    margin-top: 30px;
-    padding: 35px;
-    border-radius: 15px;
-    background: #0d1322;
-    border: 1px solid #20283a;
-}
-
-/* USE CASES */
-
-.usecases {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.usecase {
-    padding: 30px;
-    border-radius: 15px;
-    background: linear-gradient(145deg, #101728, #0a0f1c);
-    border: 1px solid #20283a;
-}
-
-.usecase h3 {
-    margin-bottom: 10px;
-}
-
-.usecase p {
-    color: #8f95a6;
-}
-
-/* REVIEWS */
-
-.reviews-section {
-    background: #080d18;
-}
-
-.reviews {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-    gap: 20px;
-}
-
-.review {
-    background: #0d1322;
-    border: 1px solid #20283a;
-    border-radius: 15px;
-    padding: 25px;
-    transition: 0.3s;
-}
-
-.review:hover {
-    transform: translateY(-4px);
-    border-color: #393f57;
-}
-
-.stars {
-    color: #ffd43b;
-    font-size: 20px;
-    letter-spacing: 2px;
-    margin-bottom: 15px;
-}
-
-.review p {
-    color: #b0b5c2;
-    margin-bottom: 20px;
-}
-
-.reviewer {
-    font-weight: bold;
-}
-
-.reviewer span {
-    display: block;
-    color: #70778a;
-    font-size: 13px;
-    font-weight: normal;
-}
-
-/* REVIEW FORM */
-
-.review-form {
-    max-width: 650px;
-    margin: 50px auto 0;
-    background: #0d1322;
-    border: 1px solid #20283a;
-    border-radius: 15px;
-    padding: 30px;
-}
-
-.review-form h3 {
-    margin-bottom: 20px;
-}
-
-.review-form input,
-.review-form textarea,
-.review-form select {
-    width: 100%;
-    padding: 13px;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    border: 1px solid #293247;
-    background: #080d18;
-    color: white;
-    font-family: inherit;
-}
-
-.review-form textarea {
-    min-height: 100px;
-    resize: vertical;
-}
-
-/* FORUM */
-
-.forum-box {
-    max-width: 800px;
-    margin: auto;
-}
-
-.forum-post {
-    background: #0d1322;
-    border: 1px solid #20283a;
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-}
-
-.forum-post strong {
-    color: #6c63ff;
-}
-
-.forum-date {
-    color: #666e80;
-    font-size: 12px;
-    margin-top: 7px;
-}
-
-.forum-form {
-    margin-top: 25px;
-    background: #0d1322;
-    border: 1px solid #20283a;
-    padding: 20px;
-    border-radius: 12px;
-}
-
-.forum-form input,
-.forum-form textarea {
-    width: 100%;
-    padding: 13px;
-    margin-bottom: 12px;
-    border-radius: 8px;
-    border: 1px solid #293247;
-    background: #080d18;
-    color: white;
-    font-family: inherit;
-}
-
-.forum-form textarea {
-    min-height: 90px;
-    resize: vertical;
-}
-
-.loading {
-    color: #777;
-    text-align: center;
-    padding: 20px;
-}
-
-/* PRICING */
-
-.pricing {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.price-card {
-    background: #0d1322;
-    border: 1px solid #20283a;
-    border-radius: 15px;
-    padding: 35px;
-    text-align: center;
-}
-
-.price-card.featured {
-    border: 1px solid #6c63ff;
-    transform: scale(1.03);
-}
-
-.price {
-    font-size: 40px;
-    font-weight: bold;
-    margin: 20px 0;
-}
-
-.price span {
-    font-size: 14px;
-    color: #777;
-}
-
-.price-card ul {
-    list-style: none;
-    text-align: left;
-    margin: 25px 0;
-}
-
-.price-card li {
-    margin: 12px 0;
-    color: #a4a9b7;
-}
-
-.price-card li::before {
-    content: "✓ ";
-    color: #6c63ff;
-}
-
-/* MOBILE */
-
-.mobile-box {
-    text-align: center;
-    padding: 50px;
-    border-radius: 20px;
-    background: linear-gradient(135deg, #11182b, #0a0f1b);
-    border: 1px solid #20283a;
-}
-
-.mobile-box h2 {
-    font-size: 40px;
-}
-
-/* FOOTER */
-
-footer {
-    border-top: 1px solid #171d2a;
-    padding: 35px 20px;
-    text-align: center;
-    color: #686e7c;
-}
-
-/* RESPONSIVE */
-
-@media(max-width: 800px) {
-
-    .nav-links {
-        display: none;
-    }
-
-    .workflow,
-    .usecases,
-    .pricing {
-        grid-template-columns: 1fr;
-    }
-
-    .price-card.featured {
-        transform: none;
-    }
-
-    .hero h1 {
-        letter-spacing: -3px;
-    }
-
-    .mobile-box h2 {
-        font-size: 30px;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Zariff AI — Your Computer. Your Way.</title>
+
+    <meta
+        name="description"
+        content="Zariff AI is a personalized AI agent that lets you control your computer through natural voice commands and hand gestures."
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #07070a;
+            color: #f5f5f7;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input,
+        textarea {
+            font: inherit;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 18px 7%;
+
+            background: rgba(7, 7, 10, 0.82);
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid #202027;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: #8b7cff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #aaaab5;
+            transition: 0.25s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        /* =========================
+           GENERAL
+        ========================= */
+
+        section {
+            padding: 100px 7%;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 55px;
+        }
+
+        .section-title h2 {
+            font-size: clamp(32px, 5vw, 52px);
+            margin-bottom: 12px;
+            letter-spacing: -2px;
+        }
+
+        .section-title p {
+            max-width: 650px;
+            margin: auto;
+            color: #9999a6;
+            font-size: 17px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 7px 14px;
+            border: 1px solid #35313f;
+            border-radius: 50px;
+            color: #b7afff;
+            background: #12101b;
+            margin-bottom: 18px;
+            font-size: 13px;
+        }
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 88vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            text-align: center;
+
+            position: relative;
+            overflow: hidden;
+
+            background:
+                radial-gradient(circle at 50% 20%, #181331 0%, transparent 45%);
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 88px);
+            line-height: 0.98;
+            letter-spacing: -5px;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, #ffffff, #9387ff);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero p {
+            max-width: 720px;
+            margin: auto;
+            color: #a3a3b0;
+            font-size: 19px;
+        }
+
+        .hero-buttons {
+            margin-top: 35px;
+
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 14px 23px;
+            border-radius: 12px;
+
+            font-weight: 700;
+
+            border: 1px solid transparent;
+
+            transition: 0.25s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: #ffffff;
+            color: #08080a;
+        }
+
+        .btn-secondary {
+            background: #111116;
+            color: white;
+            border-color: #2b2b34;
+        }
+
+        /* =========================
+           FEATURES
+        ========================= */
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .feature-card {
+            padding: 30px;
+
+            background: #101014;
+            border: 1px solid #22222a;
+            border-radius: 18px;
+
+            transition: 0.25s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #444052;
+        }
+
+        .feature-icon {
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 9px;
+            font-size: 20px;
+        }
+
+        .feature-card p {
+            color: #9696a1;
+        }
+
+        /* =========================
+           WORKFLOW
+        ========================= */
+
+        .workflow {
+            background: #0b0b0f;
+        }
+
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .step {
+            text-align: center;
+            padding: 35px 20px;
+        }
+
+        .step-number {
+            width: 55px;
+            height: 55px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin: 0 auto 18px;
+
+            border-radius: 50%;
+
+            background: #17151f;
+            border: 1px solid #373342;
+
+            font-weight: 800;
+            color: #b8afff;
+        }
+
+        .step p {
+            color: #94949f;
+        }
+
+        /* =========================
+           AI TERMINAL
+        ========================= */
+
+        .terminal {
+            max-width: 850px;
+            margin: auto;
+
+            background: #0b0b0e;
+            border: 1px solid #292932;
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            box-shadow: 0 20px 70px rgba(0,0,0,0.35);
+        }
+
+        .terminal-top {
+            padding: 13px 18px;
+            background: #121217;
+            border-bottom: 1px solid #25252d;
+            color: #777782;
+            font-size: 13px;
+        }
+
+        .terminal-body {
+            padding: 28px;
+
+            font-family: Consolas, monospace;
+            font-size: 14px;
+        }
+
+        .terminal-line {
+            margin-bottom: 13px;
+        }
+
+        .terminal-user {
+            color: #8f83ff;
+        }
+
+        .terminal-ai {
+            color: #75d7a3;
+        }
+
+        .terminal-muted {
+            color: #777782;
+        }
+
+        /* =========================
+           SECURITY
+        ========================= */
+
+        .security-box {
+            max-width: 950px;
+            margin: auto;
+
+            padding: 50px;
+
+            border: 1px solid #282832;
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111117,
+                    #0b0b0e
+                );
+        }
+
+        .security-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 45px;
+            align-items: center;
+        }
+
+        .security-content h2 {
+            font-size: 38px;
+            margin-bottom: 15px;
+        }
+
+        .security-content p {
+            color: #9898a4;
+        }
+
+        .security-list {
+            list-style: none;
+        }
+
+        .security-list li {
+            padding: 13px 0;
+            border-bottom: 1px solid #25252d;
+            color: #c5c5cd;
+        }
+
+        .security-list li::before {
+            content: "✓";
+            margin-right: 10px;
+            color: #7ed9a5;
+        }
+
+        /* =========================
+           USE CASES
+        ========================= */
+
+        .use-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .use-card {
+            padding: 32px;
+
+            background: #101014;
+            border: 1px solid #24242d;
+            border-radius: 18px;
+        }
+
+        .use-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .use-card p {
+            color: #94949f;
+        }
+
+        /* =========================
+           PRICING
+        ========================= */
+
+        #pricing {
+            text-align: center;
+            background: #0b0b0f;
+        }
+
+        .pricing-grid {
+            max-width: 1100px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+
+            align-items: stretch;
+        }
+
+        .price-card {
+            padding: 35px 30px;
+
+            background: #101014;
+            border: 1px solid #292932;
+            border-radius: 20px;
+
+            text-align: left;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        .price-card.featured {
+            border-color: #766bff;
+            box-shadow: 0 0 35px rgba(118,107,255,0.13);
+        }
+
+        .popular {
+            display: inline-block;
+            align-self: flex-start;
+
+            padding: 5px 10px;
+            margin-bottom: 13px;
+
+            border-radius: 50px;
+
+            background: #25213b;
+            color: #b8afff;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .price-card h3 {
+            font-size: 24px;
+        }
+
+        .price {
+            margin: 15px 0 25px;
+
+            font-size: 42px;
+            font-weight: 800;
+        }
+
+        .price span {
+            font-size: 14px;
+            color: #858590;
+            font-weight: 400;
+        }
+
+        .price-card ul {
+            list-style: none;
+            margin-bottom: 25px;
+            flex: 1;
+        }
+
+        .price-card li {
+            padding: 8px 0;
+            color: #a8a8b2;
+        }
+
+        .price-card li::before {
+            content: "✓";
+            color: #7ed9a5;
+            margin-right: 9px;
+        }
+
+        .price-card .btn {
+            width: 100%;
+        }
+
+        /* =========================
+           REVIEWS
+        ========================= */
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 45px;
+        }
+
+        .review-card {
+            padding: 27px;
+
+            background: #101014;
+            border: 1px solid #24242d;
+            border-radius: 18px;
+        }
+
+        .stars {
+            color: #ffd45c;
+            margin-bottom: 12px;
+        }
+
+        .review-card p {
+            color: #b0b0ba;
+            margin-bottom: 18px;
+        }
+
+        .review-name {
+            font-weight: 700;
+        }
+
+        .review-form,
+        .forum-form {
+            max-width: 700px;
+            margin: auto;
+
+            padding: 28px;
+
+            background: #101014;
+            border: 1px solid #25252d;
+            border-radius: 18px;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+
+            padding: 13px 15px;
+            margin-bottom: 13px;
+
+            background: #08080b;
+            color: white;
+
+            border: 1px solid #292932;
+            border-radius: 10px;
+
+            outline: none;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #665cff;
+        }
+
+        textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+
+        /* =========================
+           FORUM
+        ========================= */
+
+        .forum-posts {
+            max-width: 850px;
+            margin: 0 auto 35px;
+        }
+
+        .forum-post {
+            padding: 22px;
+            margin-bottom: 13px;
+
+            background: #101014;
+            border: 1px solid #25252d;
+            border-radius: 15px;
+        }
+
+        .forum-post strong {
+            color: #b9b1ff;
+        }
+
+        .forum-post p {
+            margin-top: 6px;
+            color: #b0b0ba;
+        }
+
+        .empty-forum {
+            text-align: center;
+            color: #777782;
+            padding: 25px;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        .mobile-section {
+            text-align: center;
+            background:
+                radial-gradient(circle at center, #17132a, #08080b 65%);
+        }
+
+        .mobile-section h2 {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .mobile-section p {
+            max-width: 650px;
+            margin: auto;
+            color: #9999a4;
+        }
+
+        .coming-soon {
+            display: inline-block;
+            margin-top: 25px;
+
+            padding: 10px 17px;
+
+            border: 1px solid #3a354b;
+            border-radius: 50px;
+
+            color: #b8afff;
+            background: #13111b;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            padding: 45px 7%;
+
+            border-top: 1px solid #202027;
+
+            text-align: center;
+            color: #6e6e79;
+        }
+
+        footer strong {
+            color: #b4b4bd;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .features-grid,
+            .pricing-grid,
+            .reviews-grid,
+            .use-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .security-content {
+                grid-template-columns: 1fr;
+            }
+
+            .workflow-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media (max-width: 650px) {
+
+            nav {
+                padding: 15px 5%;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: 75px 5%;
+            }
+
+            .hero h1 {
+                letter-spacing: -3px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .features-grid,
+            .pricing-grid,
+            .reviews-grid,
+            .use-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .security-box {
+                padding: 30px 23px;
+            }
+
+            .security-content h2,
+            .mobile-section h2 {
+                font-size: 32px;
+            }
+
+            .price {
+                font-size: 38px;
+            }
+
+        }
+
+    </style>
 </head>
 
 <body>
 
 <!-- =========================
-     NAVIGATION
+     NAVBAR
 ========================= -->
 
 <nav>
-    <div class="nav-container">
 
-        <div class="logo">
-            Zariff<span>AI</span>
-        </div>
+    <a href="#home" class="logo">
+        Zariff<span>AI</span>
+    </a>
 
-        <div class="nav-links">
-            <a href="#features">Features</a>
-            <a href="#reviews">Reviews</a>
-            <a href="#forum">Forum</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#download" class="nav-btn">Download</a>
-        </div>
+    <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+        <li><a href="#forum">Forum</a></li>
+    </ul>
 
-    </div>
 </nav>
 
 
@@ -583,26 +764,38 @@ footer {
      HERO
 ========================= -->
 
-<section class="hero" id="download">
+<section class="hero" id="home">
 
     <div class="hero-content">
 
-        <div class="badge">
-            AI that works the way you do
+        <div class="tag">
+            Personalized AI Agent
         </div>
 
         <h1>
             Your computer.<br>
-            <span class="gradient-text">Your way.</span>
+            <span>Your way.</span>
         </h1>
 
         <p>
-            Zariff AI is a personalized AI agent that lets you
-            control your computer naturally using your voice
-            and hand gestures.
+            Zariff AI lets you control your computer naturally through
+            voice and hand gestures while learning how you work.
+            Personalized to you. Built to work offline.
         </p>
 
-      <div class="hero-buttons"> <!-- YOUR EXE DOWNLOAD --> <a <a href="#pricing">Download Free</a> download class="btn btn-primary" > ↓ Download Zariffai </a> <a href="#features"
+        <div class="hero-buttons">
+
+            <!-- SCROLLS TO PRICING -->
+
+            <a
+                href="#pricing"
+                class="btn btn-primary"
+            >
+                ↓ Download Zariffai
+            </a>
+
+            <a
+                href="#features"
                 class="btn btn-secondary"
             >
                 Explore Zariff AI
@@ -624,67 +817,119 @@ footer {
     <div class="container">
 
         <div class="section-title">
-            <h2>Built around you.</h2>
-            <p>
-                Powerful AI without forcing you to change
-                how you work.
-            </p>
-        </div>
 
-        <div class="features">
-
-            <div class="card">
-                <div class="card-icon">🎙️</div>
-                <h3>Natural Voice</h3>
-                <p>
-                    Speak naturally and let Zariff AI understand
-                    what you want and act on it.
-                </p>
+            <div class="tag">
+                What makes Zariff different
             </div>
 
-            <div class="card">
-                <div class="card-icon">🖐️</div>
-                <h3>Hand Gestures</h3>
+            <h2>
+                AI that adapts to you.
+            </h2>
+
+            <p>
+                Zariff isn't just another chatbot.
+                It's an AI agent designed around the way you actually
+                interact with your computer.
+            </p>
+
+        </div>
+
+
+        <div class="features-grid">
+
+            <div class="feature-card">
+
+                <div class="feature-icon">🎤</div>
+
+                <h3>
+                    Natural Voice
+                </h3>
+
+                <p>
+                    Speak naturally and tell Zariff what you want.
+                    No complicated commands required.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">👋</div>
+
+                <h3>
+                    Hand Gestures
+                </h3>
+
                 <p>
                     Interact with your computer using intuitive
                     hand gestures.
                 </p>
+
             </div>
 
-            <div class="card">
-                <div class="card-icon">🧠</div>
-                <h3>Personal LLM</h3>
+
+            <div class="feature-card">
+
+                <div class="feature-icon">🧠</div>
+
+                <h3>
+                    Personal LLM
+                </h3>
+
                 <p>
-                    Personalize your AI so it can adapt to your
-                    preferences and workflow.
+                    Your Zariff experience becomes personalized
+                    around your own usage and preferences.
                 </p>
+
             </div>
 
-            <div class="card">
-                <div class="card-icon">⚡</div>
-                <h3>Offline Capable</h3>
+
+            <div class="feature-card">
+
+                <div class="feature-icon">⚡</div>
+
+                <h3>
+                    Offline Capable
+                </h3>
+
                 <p>
-                    Designed to perform AI tasks locally without
-                    depending entirely on the internet.
+                    Designed to perform locally so your workflows
+                    don't have to depend entirely on the internet.
                 </p>
+
             </div>
 
-            <div class="card">
-                <div class="card-icon">🛡️</div>
-                <h3>Built-in Firewall</h3>
+
+            <div class="feature-card">
+
+                <div class="feature-icon">🛡️</div>
+
+                <h3>
+                    Built-in Firewall
+                </h3>
+
                 <p>
-                    Security-focused architecture designed to
-                    protect your AI environment.
+                    Security is built into Zariff AI instead of
+                    being treated as an afterthought.
                 </p>
+
             </div>
 
-            <div class="card">
-                <div class="card-icon">🌎</div>
-                <h3>Your Language</h3>
+
+            <div class="feature-card">
+
+                <div class="feature-icon">🌍</div>
+
+                <h3>
+                    Your Language
+                </h3>
+
                 <p>
-                    Type and communicate in the language that
-                    feels natural to you.
+                    Type, speak and interact in the language
+                    you're comfortable with.
                 </p>
+
             </div>
 
         </div>
@@ -698,41 +943,78 @@ footer {
      WORKFLOW
 ========================= -->
 
-<section>
+<section class="workflow">
 
     <div class="container">
 
         <div class="section-title">
-            <h2>Speak. Understand. Act.</h2>
+
+            <div class="tag">
+                Simple interaction
+            </div>
+
+            <h2>
+                Speak. Understand. Act.
+            </h2>
+
             <p>
-                Three simple steps between you and your computer.
+                You don't have to learn how to talk to Zariff.
+                Zariff learns how to understand you.
             </p>
+
         </div>
 
-        <div class="workflow">
+
+        <div class="workflow-grid">
 
             <div class="step">
-                <div class="step-number">1</div>
-                <h3>Speak</h3>
+
+                <div class="step-number">
+                    01
+                </div>
+
+                <h3>
+                    Speak
+                </h3>
+
                 <p>
-                    Tell Zariff AI what you want in your own words.
+                    Give Zariff a natural instruction.
                 </p>
+
             </div>
 
-            <div class="step">
-                <div class="step-number">2</div>
-                <h3>Understand</h3>
-                <p>
-                    Your personalized AI interprets your request.
-                </p>
-            </div>
 
             <div class="step">
-                <div class="step-number">3</div>
-                <h3>Act</h3>
+
+                <div class="step-number">
+                    02
+                </div>
+
+                <h3>
+                    Understand
+                </h3>
+
                 <p>
-                    Zariff AI performs the workflow for you.
+                    Your personalized AI interprets what you mean.
                 </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    03
+                </div>
+
+                <h3>
+                    Act
+                </h3>
+
+                <p>
+                    Zariff performs the workflow on your computer.
+                </p>
+
             </div>
 
         </div>
@@ -752,44 +1034,66 @@ footer {
 
         <div class="section-title">
 
+            <div class="tag">
+                Built around you
+            </div>
+
             <h2>
-                AI that gets to know your workflow.
+                A computer assistant that learns your way.
             </h2>
 
             <p>
-                Create an experience tailored to the way you work.
+                Zariff can personalize the way it responds and
+                performs tasks based on your interactions.
             </p>
 
         </div>
 
+
         <div class="terminal">
 
-            <div class="terminal-line">
-                <span class="green">zariff@ai</span>:~$ initialize
+            <div class="terminal-top">
+                zariff-ai / personalized-agent
             </div>
 
-            <div class="terminal-line">
-                Loading personal model...
-            </div>
+            <div class="terminal-body">
 
-            <div class="terminal-line blue">
-                ✓ Preferences loaded
-            </div>
+                <div class="terminal-line terminal-muted">
+                    Initializing personalized model...
+                </div>
 
-            <div class="terminal-line blue">
-                ✓ Workflow patterns loaded
-            </div>
+                <div class="terminal-line">
+                    <span class="terminal-user">
+                        You:
+                    </span>
+                    Order my usual pizza.
+                </div>
 
-            <div class="terminal-line blue">
-                ✓ Voice interface ready
-            </div>
+                <div class="terminal-line">
+                    <span class="terminal-ai">
+                        Zariff:
+                    </span>
+                    Got it. I'll handle your usual order.
+                </div>
 
-            <div class="terminal-line blue">
-                ✓ Gesture interface ready
-            </div>
+                <div class="terminal-line terminal-muted">
+                    Learning preference → saved locally
+                </div>
 
-            <div class="terminal-line">
-                Zariff AI is ready.
+                <div class="terminal-line">
+                    <span class="terminal-user">
+                        You:
+                    </span>
+                    Type this exactly in Hindi.
+                </div>
+
+                <div class="terminal-line">
+                    <span class="terminal-ai">
+                        Zariff:
+                    </span>
+                    Understood.
+                </div>
+
             </div>
 
         </div>
@@ -803,35 +1107,52 @@ footer {
      SECURITY
 ========================= -->
 
-<section>
+<section id="security">
 
     <div class="container">
 
-        <div class="section-title">
+        <div class="security-box">
 
-            <h2>
-                Built with security in mind.
-            </h2>
+            <div class="security-content">
 
-            <p>
-                Your AI should work for you — safely.
-            </p>
+                <div>
 
-        </div>
+                    <div class="tag">
+                        Security first
+                    </div>
 
-        <div class="security">
+                    <h2>
+                        Your computer is yours.
+                    </h2>
 
-            <div class="security-box">
+                    <p>
+                        Zariff AI is designed with privacy and
+                        security in mind, including a built-in
+                        firewall and offline capabilities.
+                    </p>
 
-                <h3>🛡️ Built-in Protection</h3>
+                </div>
 
-                <p style="color:#9298a8; margin-top:15px;">
 
-                    Zariff AI is designed with a security-focused
-                    architecture and built-in firewall capabilities
-                    to help keep your environment protected.
+                <ul class="security-list">
 
-                </p>
+                    <li>
+                        Built-in firewall
+                    </li>
+
+                    <li>
+                        Offline-capable workflows
+                    </li>
+
+                    <li>
+                        Personalized local experience
+                    </li>
+
+                    <li>
+                        Natural human-computer interaction
+                    </li>
+
+                </ul>
 
             </div>
 
@@ -852,246 +1173,62 @@ footer {
 
         <div class="section-title">
 
+            <div class="tag">
+                What can it do?
+            </div>
+
             <h2>
-                Imagine what you could automate.
+                More than just answering questions.
             </h2>
 
             <p>
-                From everyday tasks to learning something new.
+                Zariff is designed to actually interact with
+                your computer and help you get things done.
             </p>
 
         </div>
 
-        <div class="usecases">
 
-            <div class="usecase">
+        <div class="use-grid">
 
-                <h3>🍕 Order a Pizza</h3>
+            <div class="use-card">
+
+                <h3>
+                    🍕 Order a Pizza
+                </h3>
 
                 <p>
-                    Tell Zariff AI what you want and let it
-                    handle the workflow.
+                    Tell Zariff what you want and let it handle
+                    the computer workflow.
                 </p>
 
             </div>
 
-            <div class="usecase">
 
-                <h3>📚 Learn Something</h3>
+            <div class="use-card">
+
+                <h3>
+                    📚 Learn Something
+                </h3>
 
                 <p>
-                    Ask questions naturally and learn directly
-                    through your personalized AI.
+                    Ask Zariff to teach you a concept,
+                    explain something or help you understand a topic.
                 </p>
 
             </div>
 
-            <div class="usecase">
 
-                <h3>⌨️ Type For You</h3>
+            <div class="use-card">
 
-                <p>
-                    Tell Zariff AI what to type and let it
-                    handle the keyboard interaction.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     REVIEWS
-========================= -->
-
-<section id="reviews" class="reviews-section">
-
-    <div class="container">
-
-        <div class="section-title">
-
-            <h2>
-                What people think.
-            </h2>
-
-            <p>
-                See what the Zariff AI community has to say.
-            </p>
-
-        </div>
-
-        <div class="reviews">
-
-            <div class="review">
-
-                <div class="stars">
-                    ★★★★★
-                </div>
+                <h3>
+                    ⌨️ Type For You
+                </h3>
 
                 <p>
-                    "The idea of controlling a computer without
-                    touching the keyboard is seriously cool."
+                    Tell Zariff what to type and it can reproduce
+                    your requested text in your chosen language.
                 </p>
-
-                <div class="reviewer">
-                    Early Tester
-                    <span>Beta Community</span>
-                </div>
-
-            </div>
-
-            <div class="review">
-
-                <div class="stars">
-                    ★★★★★
-                </div>
-
-                <p>
-                    "The personalized AI concept makes Zariff
-                    feel much more useful than a normal assistant."
-                </p>
-
-                <div class="reviewer">
-                    Community Member
-                    <span>Zariff AI Community</span>
-                </div>
-
-            </div>
-
-            <div class="review">
-
-                <div class="stars">
-                    ★★★★★
-                </div>
-
-                <p>
-                    "Voice plus gestures is a really interesting
-                    way to interact with a computer."
-                </p>
-
-                <div class="reviewer">
-                    Beta User
-                    <span>Zariff AI Community</span>
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- REVIEW FORM -->
-
-        <div class="review-form">
-
-            <h3>Leave a Review</h3>
-
-            <input
-                type="text"
-                id="reviewName"
-                placeholder="Your name"
-                maxlength="50"
-            >
-
-            <select id="reviewRating">
-
-                <option value="5">
-                    ★★★★★ — 5 Stars
-                </option>
-
-                <option value="4">
-                    ★★★★☆ — 4 Stars
-                </option>
-
-                <option value="3">
-                    ★★★☆☆ — 3 Stars
-                </option>
-
-                <option value="2">
-                    ★★☆☆☆ — 2 Stars
-                </option>
-
-                <option value="1">
-                    ★☆☆☆☆ — 1 Star
-                </option>
-
-            </select>
-
-            <textarea
-                id="reviewText"
-                placeholder="Write your review..."
-                maxlength="500"
-            ></textarea>
-
-            <button
-                class="btn btn-primary"
-                onclick="addReview()"
-            >
-                Submit Review
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     FORUM
-========================= -->
-
-<section id="forum">
-
-    <div class="container">
-
-        <div class="section-title">
-
-            <h2>
-                Join the community.
-            </h2>
-
-            <p>
-                Discuss workflows, ideas and personalized agents.
-            </p>
-
-        </div>
-
-        <div class="forum-box">
-
-            <div id="forumPosts">
-
-                <div class="loading">
-                    Loading discussions...
-                </div>
-
-            </div>
-
-
-            <div class="forum-form">
-
-                <input
-                    type="text"
-                    id="forumName"
-                    placeholder="Your name"
-                    maxlength="50"
-                >
-
-                <textarea
-                    id="forumMessage"
-                    placeholder="Start a discussion..."
-                    maxlength="1000"
-                ></textarea>
-
-                <button
-                    class="btn btn-primary"
-                    onclick="addPost()"
-                >
-                    Post Discussion
-                </button>
 
             </div>
 
@@ -1106,33 +1243,41 @@ footer {
      PRICING
 ========================= -->
 
-<section class="pricing" id="pricing">
+<section id="pricing">
 
     <div class="container">
 
         <div class="section-title">
 
+            <div class="tag">
+                Simple pricing
+            </div>
+
             <h2>
-                Choose your Zariff.
+                Choose Your Zariff AI
             </h2>
 
             <p>
-                Start free. Upgrade when you need more.
+                Start free and upgrade when you need more.
             </p>
 
         </div>
 
-        <div class="pricing">
+
+        <div class="pricing-grid">
 
 
             <!-- FREE -->
 
             <div class="price-card">
 
-                <h3>Free</h3>
+                <h3>
+                    Free
+                </h3>
 
                 <div class="price">
-                    ₹0 <span>/month</span>
+                    ₹0
+                    <span>/month</span>
                 </div>
 
                 <ul>
@@ -1159,26 +1304,38 @@ footer {
 
                     <li>
                         Download Zariff AI
-            
-</li>
+                    </li>
 
-</ul>
+                </ul>
 
-<a href="https://github.com/Tiny-Workflow/zariffai/releases/download/Zariffai/Zariffai.exe">
-    Download Free
-</a>
 
-</div>
+                <!-- ACTUAL EXE DOWNLOAD -->
+
+                <a
+                    href="https://github.com/Tiny-Workflow/zariffai/releases/download/Zariffai/Zariffai.exe"
+                    class="btn btn-primary"
+                >
+                    Download Free
+                </a>
+
+            </div>
 
 
             <!-- PRO -->
 
             <div class="price-card featured">
 
-                <h3>Pro</h3>
+                <div class="popular">
+                    MOST POPULAR
+                </div>
+
+                <h3>
+                    Pro
+                </h3>
 
                 <div class="price">
-                    ₹499 <span>/month</span>
+                    ₹499
+                    <span>/month</span>
                 </div>
 
                 <ul>
@@ -1192,26 +1349,22 @@ footer {
                     </li>
 
                     <li>
-                        More powerful workflows
+                        More powerful AI workflows
                     </li>
 
                     <li>
-                        Advanced AI features
+                        Advanced computer control
                     </li>
 
                     <li>
-                        Priority updates
+                        Priority features
                     </li>
 
                 </ul>
 
                 <a
-                    href="#"
+                    href="#forum"
                     class="btn btn-primary"
-                    onclick="
-                        alert('Pro subscriptions are coming soon!');
-                        return false;
-                    "
                 >
                     Get Pro
                 </a>
@@ -1223,10 +1376,13 @@ footer {
 
             <div class="price-card">
 
-                <h3>Advanced</h3>
+                <h3>
+                    Advanced
+                </h3>
 
                 <div class="price">
-                    ₹1,299 <span>/month</span>
+                    ₹1,299
+                    <span>/month</span>
                 </div>
 
                 <ul>
@@ -1240,26 +1396,22 @@ footer {
                     </li>
 
                     <li>
-                        Advanced agent workflows
+                        Advanced AI agents
                     </li>
 
                     <li>
-                        Premium features
+                        More complex workflows
                     </li>
 
                     <li>
-                        Priority support
+                        Future premium capabilities
                     </li>
 
                 </ul>
 
                 <a
-                    href="#"
-                    class="btn btn-primary"
-                    onclick="
-                        alert('Advanced subscriptions are coming soon!');
-                        return false;
-                    "
+                    href="#forum"
+                    class="btn btn-secondary"
                 >
                     Get Advanced
                 </a>
@@ -1274,30 +1426,216 @@ footer {
 
 
 <!-- =========================
-     MOBILE
+     REVIEWS
 ========================= -->
 
-<section>
+<section id="reviews">
 
     <div class="container">
 
-        <div class="mobile-box">
+        <div class="section-title">
+
+            <div class="tag">
+                Community
+            </div>
 
             <h2>
-                📱 Zariff AI on mobile
+                What people think
             </h2>
 
-            <p style="color:#8e95a5; margin:15px 0 25px;">
-
-                The mobile version of Zariff AI is currently
-                under development.
-
+            <p>
+                Share your experience with Zariff AI.
             </p>
 
-            <span class="badge">
-                Coming Soon
-            </span>
+        </div>
 
+
+        <div
+            class="reviews-grid"
+            id="reviewsList"
+        >
+
+            <div class="review-card">
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    "The idea of controlling a computer without
+                    constantly touching it is seriously cool."
+                </p>
+
+                <div class="review-name">
+                    Early User
+                </div>
+
+            </div>
+
+
+            <div class="review-card">
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    "The personalization makes Zariff feel much
+                    more useful than a normal chatbot."
+                </p>
+
+                <div class="review-name">
+                    Beta Tester
+                </div>
+
+            </div>
+
+
+            <div class="review-card">
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    "Voice plus gestures is a really interesting
+                    way to interact with a computer."
+                </p>
+
+                <div class="review-name">
+                    Community Member
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- REVIEW FORM -->
+
+        <div class="review-form">
+
+            <h3 style="margin-bottom: 15px;">
+                Leave a review
+            </h3>
+
+            <input
+                type="text"
+                id="reviewName"
+                placeholder="Your name"
+            >
+
+            <textarea
+                id="reviewText"
+                placeholder="Write your review..."
+            ></textarea>
+
+            <button
+                class="btn btn-primary"
+                onclick="addReview()"
+                style="border: none; cursor: pointer;"
+            >
+                Post Review
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     FORUM
+========================= -->
+
+<section id="forum">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <div class="tag">
+                Zariff Community
+            </div>
+
+            <h2>
+                Discuss. Share. Build.
+            </h2>
+
+            <p>
+                Talk about Zariff AI, share ideas and discuss
+                how you use it.
+            </p>
+
+        </div>
+
+
+        <!-- POSTS APPEAR HERE -->
+
+        <div
+            class="forum-posts"
+            id="forumPosts"
+        ></div>
+
+
+        <!-- FORUM FORM -->
+
+        <div class="forum-form">
+
+            <h3 style="margin-bottom: 15px;">
+                Start a discussion
+            </h3>
+
+            <input
+                type="text"
+                id="forumName"
+                placeholder="Your name"
+            >
+
+            <textarea
+                id="forumMessage"
+                placeholder="What's on your mind?"
+            ></textarea>
+
+            <button
+                class="btn btn-primary"
+                onclick="addForumPost()"
+                style="border: none; cursor: pointer;"
+            >
+                Post Discussion
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     MOBILE
+========================= -->
+
+<section class="mobile-section">
+
+    <div class="container">
+
+        <div class="tag">
+            Coming soon
+        </div>
+
+        <h2>
+            Zariff AI on mobile.
+        </h2>
+
+        <p>
+            We're working on bringing the Zariff experience
+            to mobile devices.
+        </p>
+
+        <div class="coming-soon">
+            Mobile version under development
         </div>
 
     </div>
@@ -1311,345 +1649,262 @@ footer {
 
 <footer>
 
-    <p>
-        © 2026 Zariff AI. All rights reserved.
-    </p>
+    <strong>
+        Zariff AI
+    </strong>
 
-    <p style="margin-top:8px;">
-        Built by PM · Zariff AI
-    </p>
+    <br>
+
+    Your computer. Your way.
+
+    <br><br>
+
+    © 2026 Zariff AI · Built by PM
 
 </footer>
 
 
 <script>
 
-/* =====================================================
-   SUPABASE CONFIGURATION
-   =====================================================
+    /* =====================================================
+       REVIEWS
+       ===================================================== */
 
-   REPLACE THESE TWO VALUES WITH YOUR SUPABASE DETAILS.
+    function escapeHTML(text) {
 
-   Supabase Dashboard
-   → Project Settings
-   → API
+        const div = document.createElement("div");
 
-===================================================== */
+        div.textContent = text;
 
-const SUPABASE_URL = "YOUR_SUPABASE_URL";
-
-const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+        return div.innerHTML;
+    }
 
 
-/* Connect to Supabase */
+    function loadReviews() {
 
-const supabaseClient =
-    supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-    );
+        const savedReviews =
+            JSON.parse(
+                localStorage.getItem("zariffReviews") || "[]"
+            );
 
-
-/* =====================================================
-   SECURITY HELPER
-===================================================== */
-
-function escapeHTML(text) {
-
-    const div = document.createElement("div");
-
-    div.textContent = text;
-
-    return div.innerHTML;
-}
+        const list =
+            document.getElementById("reviewsList");
 
 
-/* =====================================================
-   FORUM
-===================================================== */
+        savedReviews.forEach(review => {
 
+            const card =
+                document.createElement("div");
 
-/* Load forum posts */
+            card.className = "review-card";
 
-async function loadPosts() {
+            card.innerHTML = `
 
-    const container =
-        document.getElementById("forumPosts");
+                <div class="stars">
+                    ★★★★★
+                </div>
 
-    container.innerHTML =
-        '<div class="loading">Loading discussions...</div>';
-
-    const { data, error } =
-        await supabaseClient
-            .from("posts")
-            .select("*")
-            .order("created_at", {
-                ascending: false
-            });
-
-    if (error) {
-
-        console.error(error);
-
-        container.innerHTML = `
-            <div class="forum-post">
-                <strong>Forum unavailable</strong>
                 <p>
-                    The forum database has not been connected yet.
+                    "${escapeHTML(review.text)}"
                 </p>
-            </div>
-        `;
 
-        return;
+                <div class="review-name">
+                    ${escapeHTML(review.name)}
+                </div>
+
+            `;
+
+            list.appendChild(card);
+
+        });
+
     }
 
 
-    if (!data || data.length === 0) {
+    function addReview() {
 
-        container.innerHTML = `
-            <div class="forum-post">
-                <strong>Zariff Team</strong>
-                <p>
-                    Welcome to the Zariff AI community!
-                    Be the first to start a discussion.
-                </p>
-            </div>
-        `;
+        const name =
+            document
+                .getElementById("reviewName")
+                .value
+                .trim();
 
-        return;
-    }
-
-
-    container.innerHTML = "";
+        const text =
+            document
+                .getElementById("reviewText")
+                .value
+                .trim();
 
 
-    data.forEach(post => {
+        if (!name || !text) {
 
-        const postElement =
-            document.createElement("div");
+            alert("Please enter your name and review.");
 
-        postElement.className =
-            "forum-post";
+            return;
 
-
-        const date =
-            new Date(post.created_at)
-                .toLocaleString();
+        }
 
 
-        postElement.innerHTML = `
-
-            <strong>
-                ${escapeHTML(post.username)}
-            </strong>
-
-            <p>
-                ${escapeHTML(post.message)}
-            </p>
-
-            <div class="forum-date">
-                ${escapeHTML(date)}
-            </div>
-
-        `;
+        const reviews =
+            JSON.parse(
+                localStorage.getItem("zariffReviews") || "[]"
+            );
 
 
-        container.appendChild(postElement);
-
-    });
-
-}
-
-
-/* Add forum post */
-
-async function addPost() {
-
-    const nameInput =
-        document.getElementById("forumName");
-
-    const messageInput =
-        document.getElementById("forumMessage");
+        reviews.push({
+            name: name,
+            text: text
+        });
 
 
-    const username =
-        nameInput.value.trim();
-
-    const message =
-        messageInput.value.trim();
-
-
-    if (!username || !message) {
-
-        alert(
-            "Please enter your name and discussion."
-        );
-
-        return;
-    }
-
-
-    const button =
-        document.querySelector(
-            ".forum-form button"
+        localStorage.setItem(
+            "zariffReviews",
+            JSON.stringify(reviews)
         );
 
 
-    button.disabled = true;
-
-    button.textContent =
-        "Posting...";
-
-
-    const { error } =
-        await supabaseClient
-            .from("posts")
-            .insert([
-                {
-                    username: username,
-                    message: message
-                }
-            ]);
-
-
-    if (error) {
-
-        console.error(error);
-
-        alert(
-            "Could not post your discussion. Check your database setup."
-        );
-
-        button.disabled = false;
-
-        button.textContent =
-            "Post Discussion";
-
-        return;
-    }
-
-
-    nameInput.value = "";
-
-    messageInput.value = "";
-
-
-    button.disabled = false;
-
-    button.textContent =
-        "Post Discussion";
-
-
-    await loadPosts();
-
-}
-
-
-/* =====================================================
-   REVIEWS
-===================================================== */
-
-/*
-   Reviews are displayed locally for now.
-
-   The forum above is the REAL shared system.
-*/
-
-function addReview() {
-
-    const name =
         document
             .getElementById("reviewName")
-            .value
-            .trim();
+            .value = "";
 
-
-    const rating =
-        Number(
-            document
-                .getElementById("reviewRating")
-                .value
-        );
-
-
-    const text =
         document
             .getElementById("reviewText")
-            .value
-            .trim();
+            .value = "";
 
 
-    if (!name || !text) {
+        location.reload();
 
-        alert(
-            "Please enter your name and review."
-        );
-
-        return;
     }
 
 
-    const stars =
-        "★".repeat(rating) +
-        "☆".repeat(5 - rating);
+    /* =====================================================
+       FORUM
+       ===================================================== */
+
+    function loadForumPosts() {
+
+        const posts =
+            JSON.parse(
+                localStorage.getItem("zariffForum") || "[]"
+            );
 
 
-    const review =
-        document.createElement("div");
+        const container =
+            document.getElementById("forumPosts");
 
 
-    review.className =
-        "review";
+        container.innerHTML = "";
 
 
-    review.innerHTML = `
+        if (posts.length === 0) {
 
-        <div class="stars">
-            ${stars}
-        </div>
+            container.innerHTML = `
 
-        <p>
-            "${escapeHTML(text)}"
-        </p>
+                <div class="empty-forum">
+                    No discussions yet. Be the first to start one!
+                </div>
 
-        <div class="reviewer">
-            ${escapeHTML(name)}
+            `;
 
-            <span>
-                Zariff AI Community
-            </span>
-        </div>
+            return;
 
-    `;
+        }
 
 
-    document
-        .querySelector(".reviews")
-        .appendChild(review);
+        posts.reverse().forEach(post => {
+
+            const article =
+                document.createElement("div");
+
+            article.className = "forum-post";
+
+            article.innerHTML = `
+
+                <strong>
+                    ${escapeHTML(post.name)}
+                </strong>
+
+                <p>
+                    ${escapeHTML(post.message)}
+                </p>
+
+            `;
+
+            container.appendChild(article);
+
+        });
+
+    }
 
 
-    document
-        .getElementById("reviewName")
-        .value = "";
+    function addForumPost() {
+
+        const name =
+            document
+                .getElementById("forumName")
+                .value
+                .trim();
+
+        const message =
+            document
+                .getElementById("forumMessage")
+                .value
+                .trim();
 
 
-    document
-        .getElementById("reviewText")
-        .value = "";
+        if (!name || !message) {
+
+            alert("Please enter your name and message.");
+
+            return;
+
+        }
 
 
-    alert(
-        "Thanks for your review!"
-    );
+        const posts =
+            JSON.parse(
+                localStorage.getItem("zariffForum") || "[]"
+            );
 
-}
+
+        posts.push({
+
+            name: name,
+
+            message: message,
+
+            time: new Date().toISOString()
+
+        });
 
 
-/* =====================================================
-   START FORUM
-===================================================== */
+        localStorage.setItem(
+            "zariffForum",
+            JSON.stringify(posts)
+        );
 
-loadPosts();
+
+        document
+            .getElementById("forumName")
+            .value = "";
+
+        document
+            .getElementById("forumMessage")
+            .value = "";
+
+
+        loadForumPosts();
+
+    }
+
+
+    /* =====================================================
+       LOAD DATA
+       ===================================================== */
+
+    loadReviews();
+
+    loadForumPosts();
 
 </script>
 
